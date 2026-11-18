@@ -695,7 +695,8 @@ if [[ "$FEATURES_ENABLED" == 1 ]]; then
 fi
 
 mkdir -p "$KERNEL_OUT" "$RUNS"
-exec 9>"$PIPELINE/.build.lock"
+# Lock shared build state without creating generated files in the source tree.
+exec 9>"$BUILD_ROOT/.build.lock"
 flock -n 9 || { echo "ERROR: another build is already running" >&2; exit 1; }
 : >"$COMPONENT_TIMING_FILE"
 : >"$COMPONENT_IDENTITY_FILE"
