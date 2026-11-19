@@ -12,6 +12,16 @@ This guide explains how to disassemble the Echo Gen 2. Proceed slowly and carefu
 
 ## Disassembly
 
+### Open the outer case
+
+1. Unplug the power adapter and all cables.
+2. Remove the rubber foot from the bottom of the Echo.
+3. Press the recessed centre of the exposed base with your thumb while holding the outer sleeve with your other hand. Slide the sleeve off the inner body, keeping the body supported.
+
+The four bottom-plate screws should now be exposed. The first photograph below shows this stage, with the rubber foot and outer sleeve already removed. See the opening photographs in the [iFixit AMP-board guide, step 1](https://www.ifixit.com/Guide/Amazon+Echo+2nd+Generation+AMP+Board+Replacement/114341) for a visual reference.
+
+### Remove the base plate and internal parts
+
 1. Use the T10 screwdriver to remove the four bolts securing the bottom plate.
 
 	![Removing the bottom-plate bolts](assets/1.jpg)
