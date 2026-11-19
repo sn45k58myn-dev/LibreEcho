@@ -292,13 +292,14 @@ accumulating a queue of duplicate progress replies.
 
 An `ERROR` identifies the rejected request opcode but carries the engine's
 current epoch and generation. During `OPEN`, only canonical replies to known
-older operations may be skipped. A bounded drain of valid stale replies yields
+different operations may be skipped. A bounded drain of valid stale replies yields
 `Timeout` and retains the pending `OPEN`; unknown or malformed replies remain
 failures. The existing eight-reply call bound and re-arm deadline still apply.
 This changes client recovery only; the wire protocol, sole PCM owner, SDK drift
 correction and DAC timing contract stay the same.
 
-UI regression coverage uses the real C99 sink and SDK feedback pump to check
+UI regression coverage combines real C99 sink tests, an actual SDK
+feedback-pump test, and a framed-peer test for queued old errors. These check
 delayed successor acknowledgements, duplicate progress prevention and queued
 old errors. Host evidence is separate from firmware and acoustic validation;
 the validation ladder below still applies to a candidate containing this change.
