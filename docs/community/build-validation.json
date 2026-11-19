@@ -1,0 +1,33 @@
+{
+  "status": "PREPARED_NOT_FLASHED",
+  "target": "radar_puffin",
+  "personal_version": "0.15.0",
+  "release": "radar-puffin-build-6059a7e-20ee4e9eea21de8a-2026111822324915",
+  "sources": {
+    "product": "6059a7ea6fd14ee32621d6c61fb13add523e66f8",
+    "platform": "99197eff816d2696cc8760a4a1cd86cc4fe216b0",
+    "linux": "5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0",
+    "ui": "7c00e943f681a8dcf134d15d8cbf1c6ce3ca9e3f"
+  },
+  "full_ui_suite_passed": true,
+  "javascript_openapi_checks_passed": true,
+  "supplemental_environment_gated_checks_passed": true,
+  "airplay_private_scratch_behavior_passed": true,
+  "full_image_build_passed": true,
+  "independent_image_contract_passed": true,
+  "release_completeness_pass_count": 3,
+  "signed_initial_install_verified": true,
+  "signed_generation_feature_count": 5,
+  "initial_install_sha256": "5f68596771837020bb2a8bdce93765510b418a86f17fe3a3cebd586080e113b9",
+  "complete_source_archive_sha256": "b116605ffba56126a8342d08b9a6e175cf12b82fa0db3cef76ef95c58dbab5f0",
+  "known_runtime_limitation": "Immediate pause before first PCM can precede child parent-death guard setup; established playback path passes.",
+  "personal_private_key_exported": false,
+  "official_ota_trust_compatible": false,
+  "from_empty_machine_rebuild_tested": false,
+  "hardware_tested": false,
+  "flashed": false,
+  "publication_kind": "source-only independent experimental fork",
+  "remote_ci_claimed": false,
+  "physical_hardware_acceptance_claimed": false,
+  "notes": "Local automated evidence for frozen build inputs; no independent safety audit or hardware acceptance."
+}
