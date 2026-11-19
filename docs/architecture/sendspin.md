@@ -278,6 +278,31 @@ the SDK's sync math and is a contract violation.
   completes what it has accepted to the DAC boundary, then binds to the new
   generation.
 
+### 4.7 Client recovery after interrupted playback
+
+When the engine drops a stream, the UI companion marks its session lost and
+re-arms a successor generation. While that successor `OPEN` is awaiting its
+reply, the feedback pump must not query progress for the predecessor: that
+query could consume the successor acknowledgement without adopting it.
+
+One `PROGRESS_REQ` may be outstanding per sink. A timeout resumes that request
+instead of retransmitting it. Replies consumed by another control or data wait
+retire the outstanding request too. This prevents a stalled engine from
+accumulating a queue of duplicate progress replies.
+
+An `ERROR` identifies the rejected request opcode but carries the engine's
+current epoch and generation. During `OPEN`, only canonical replies to known
+older operations may be skipped. A bounded drain of valid stale replies yields
+`Timeout` and retains the pending `OPEN`; unknown or malformed replies remain
+failures. The existing eight-reply call bound and re-arm deadline still apply.
+This changes client recovery only; the wire protocol, sole PCM owner, SDK drift
+correction and DAC timing contract stay the same.
+
+UI regression coverage uses the real C99 sink and SDK feedback pump to check
+delayed successor acknowledgements, duplicate progress prevention and queued
+old errors. Host evidence is separate from firmware and acoustic validation;
+the validation ladder below still applies to a candidate containing this change.
+
 ## 5. Feature packaging
 
 - The existing **AirPlay2 support is a physical feature and is unchanged**.
