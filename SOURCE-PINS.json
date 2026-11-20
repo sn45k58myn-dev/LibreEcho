@@ -1,0 +1,21 @@
+{
+  "version": "0.15.0",
+  "target": "radar_puffin",
+  "build": "radar-puffin-build-6059a7e-20ee4e9eea21de8a-2026111822324915",
+  "sources": {
+    "product": "6059a7ea6fd14ee32621d6c61fb13add523e66f8",
+    "platform": "99197eff816d2696cc8760a4a1cd86cc4fe216b0",
+    "linux": "5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0",
+    "ui": "7119e28fc7464c321375f5b5df9d95c0051d3929"
+  },
+  "source_links": {
+    "product": "https://github.com/sn45k58myn-dev/LibreEcho/commit/6059a7ea6fd14ee32621d6c61fb13add523e66f8",
+    "ui": "https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/7119e28fc7464c321375f5b5df9d95c0051d3929",
+    "platform": "https://github.com/sn45k58myn-dev/LibreEcho-Platform/commit/99197eff816d2696cc8760a4a1cd86cc4fe216b0",
+    "linux": "https://github.com/sn45k58myn-dev/LibreEcho-Linux/commit/5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0"
+  },
+  "firmware_distributed": false,
+  "initial_install_sha256": "5f68596771837020bb2a8bdce93765510b418a86f17fe3a3cebd586080e113b9",
+  "validation": "Initial installation, boot and owner setup passed on one full-size Echo 2. Native Sendspin playback was unreliable, so AirPlay served as the temporary music route.",
+  "source_identity_note": "Public source commit IDs reflect an authorship metadata cleanup. The source files match the inputs of the tested firmware."
+}
