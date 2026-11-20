@@ -21,10 +21,13 @@ Echo 2nd Generation (Radar/Puffin). It includes native Sendspin and local phone
 intercom. Signed OTA and one two-way iPhone intercom call passed on one Echo 2.
 The linked record gives exact build inputs and the scope of each test.
 
+Use the [installation options](docs/community/0.16.3.md#installation-options),
+[Sendspin guide](docs/audio/sendspin.md) and [phone intercom guide](docs/audio/intercom.md)
+for this fork. Voice commands for room-to-room [drop-in](docs/audio/drop-in.md)
+are in development and still need a physical two-speaker test.
 
 Echo Dot 2 support is inherited from upstream and has not been qualified in this
-fork. **Echo 3, Echo Studio and additional boards are research targets only:
-unsupported, with no compatible image or enabled port provided here.**
+fork. Echo 3, Echo Studio and additional boards remain research targets.
 
 ## Four-repository layout
 
@@ -37,19 +40,17 @@ unsupported, with no compatible image or enabled port provided here.**
 
 ## Hardware roadmap
 
-Start at the [project home](https://github.com/sn45k58myn-dev/LibreEcho),
-[hardware roadmap](https://github.com/sn45k58myn-dev/LibreEcho/blob/docs/community-publication/docs/community/ROADMAP.md),
-[board proposal template](https://github.com/sn45k58myn-dev/LibreEcho/blob/docs/community-publication/docs/community/BOARD_PROPOSAL.md), and
-[build status](https://github.com/sn45k58myn-dev/LibreEcho/blob/docs/community-publication/docs/community/BUILD_STATUS.md).
+See the [hardware roadmap](docs/community/ROADMAP.md),
+[board proposal template](docs/community/BOARD_PROPOSAL.md) and
+[build status](docs/community/BUILD_STATUS.md).
 Use [CONTRIBUTING.community.md](CONTRIBUTING.community.md) for fork-specific routing
 and preserve the existing source, test, licence and boot-chain rules.
 
 ## Build, installation and automation boundaries
 
-This publication contains source and documentation. No stable firmware release or
-working Echo 3/Studio port is announced. The locally prepared personal image uses
-a personal OTA public key and does not accept official LibreEcho OTA signatures;
-its private signing seed is not published.
+GitHub hosts the source pre-releases and validation records. The signed firmware
+stays local because a bundled audio FPGA component is blocked for redistribution.
+An OTA requires the signing trust configured on the installed build.
 
 Inherited build/release workflows and download wrappers still contain upstream
 repository defaults. They must not be presented as building or installing this

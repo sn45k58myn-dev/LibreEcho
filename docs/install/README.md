@@ -1,5 +1,9 @@
 # LibreEcho installation guide
 
+> This guide describes the upstream installer. For the community fork, start
+> with the [0.16.3 installation options](../community/0.16.3.md#installation-options)
+> and the [fork build status](../community/BUILD_STATUS.md).
+
 > For Amazon Echo 2nd generation (`radar_puffin`, MT8163) and Echo Dot 2nd
 > generation (`biscuit`). The procedure uses USB fastboot on the stock device.
 > **No shorting is needed.** On the Echo 2nd Gen you only need to reach the USB

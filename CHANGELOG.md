@@ -3,6 +3,12 @@
 Security advisories are listed separately in
 [SECURITY-ADVISORIES.md](SECURITY-ADVISORIES.md).
 
+## Community fork source pre-releases
+
+The [Echo 2 release history](docs/community/RELEASE_HISTORY.md) covers the
+0.15.0 through 0.16.3 fork builds, including native Sendspin recovery and
+local phone intercom. The entries below describe upstream releases.
+
 ## radar-puffin-v0.14.6
 
 See [the 0.14.6 release note](release/radar-puffin-v0.14.6.md). Adds a

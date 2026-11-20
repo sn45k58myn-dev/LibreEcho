@@ -75,3 +75,11 @@ or settings. Turning news off deletes the downloaded copy.
 
 Update checks, LibreEcho News, remote AI services, Home Assistant and other
 integrations only contact the network when you start them or turn them on.
+
+## Local intercom in the community fork
+
+Phone calls require a signed-in speaker account, trusted HTTPS and explicit
+permission on the speaker. The call uses the local network. Review the
+[phone intercom guide](audio/intercom.md) for the call cue, light-ring indicator,
+microphone controls and how to revoke permission. Keep account details,
+private addresses and recordings out of shared diagnostics.

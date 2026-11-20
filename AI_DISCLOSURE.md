@@ -21,6 +21,8 @@ local preparation checks and awaits a separate hardware trial.
 
 Apply each result to the named build, hardware, and test conditions. Wider
 compatibility and reliability claims require separate physical tests.
+The [room-to-room drop-in prototype](docs/audio/drop-in.md) has host tests
+with simulated endpoints. Physical speaker-to-speaker testing remains open.
 
 A known radio startup/pause race remains: pausing before the first PCM output
 can stop a child before its parent-death guard is armed. The established

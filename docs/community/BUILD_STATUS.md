@@ -1,16 +1,20 @@
-# Frozen candidate and publication status
+# Build and validation status
 
 The [Echo 2 release history](RELEASE_HISTORY.md) documents the progression from the first install to Sendspin recovery and two-way iPhone calling.
 
-The current [0.16.3 source and hardware results](0.16.3.md) record the tested
-Echo 2 OTA and one successful iPhone intercom call. The sections below are the
-historical publication record for the original 0.15.0 build.
+The current [0.16.3 source and hardware results](0.16.3.md) document the full-size Echo 2. The public GitHub releases contain source snapshots, build inputs and validation notes. The tested signed image is local because the audio FPGA component is blocked for redistribution.
+
+| Check | Evidence |
+| --- | --- |
+| Initial install and owner setup | Passed on one Echo 2 with 0.15.0. The 0.16.3 initial-install bundle passed local preparation and awaits a separate hardware trial. |
+| Native Sendspin | Playback and voice stop/restart passed on 0.15.1. Two-speaker alignment was judged by ear after restarting the group. Long-duration or instrumented sync remains open. |
+| 0.16.3 signed OTA | Passed on the same Echo 2 and Home Assistant reconnected after restart. OTA requires compatible firmware and matching signing trust. |
+| 0.16.3 phone intercom | One foreground iPhone Safari call had audio in both directions. The connection closed at hang-up. |
+| Voice room-to-room intercom | A separate [Home Assistant prototype](../audio/drop-in.md) has host test evidence. A physical two-speaker trial is pending. |
 
 ## Original 0.15.0 candidate
 
-
-The personal `0.15.0` Echo 2 candidate is **PREPARED_NOT_FLASHED**. This is a
-source-only community publication, not a hardware-qualified firmware release.
+The original 0.15.0 validation manifest recorded `PREPARED_NOT_FLASHED` at build preparation. Hardware installation and setup subsequently passed on one unit. The [release history](RELEASE_HISTORY.md) records the later result. The manifest remains the record of the original automated checks.
 
 The exact four source commits, observed local checks and artifact hashes are
 recorded in [build-validation.json](build-validation.json). The source trees
@@ -33,24 +37,15 @@ change that binary's source identity. The publication plan records the original
 upstream base and tested source tree for each component. No private signing seed,
 Wi-Fi credentials, account sessions or home-network configuration is included.
 
-## Remaining work
+## Open validation
 
 The immediate pre-first-PCM radio pause/parent-death guard race remains documented;
 the passing established-playback regression does not fix it. The HTTP rejection
 repair was tested on plain HTTP; no HTTPS relay repair is claimed.
 
-Before any hardware trial, establish exact model/board identity, boot-chain
-generation, partition layout and the appropriate install/recovery route. Then
-record boot/slot health, every microphone, physical mute/privacy, buttons/LEDs,
-speaker/AUX, Wi-Fi/discovery, repeated Home Assistant voice turns, Music Assistant
-playback and signed update behavior. Host tests and a signature do not establish
-any of those physical results.
+The [hardware roadmap](ROADMAP.md) tracks repeat tests for install and recovery, microphone and mute behavior, repeated voice turns, music synchronization and local intercom.
 
-The personal image has its own update trust root. Official upstream OTA packages
-are not interchangeable; returning to official trust needs the official reinstall
-route. Inherited workflows remain unadapted for fork publication and must stay
-disabled. No automatic update pointer, hosted installer or stable release is
-created by publishing these source repositories.
+The tested build uses a fork-specific verification key. Use the matching signing identity for an OTA to that build. The public source pre-releases do not provide a hosted installer or automatic update channel.
 
 Read [the disclaimer](../../DISCLAIMER.md), [AI disclosure](../../AI_DISCLOSURE.md)
 and [hardware roadmap](ROADMAP.md). No device repair or recovery support is promised.

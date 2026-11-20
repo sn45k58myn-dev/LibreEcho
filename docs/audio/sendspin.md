@@ -1,6 +1,12 @@
-# Sendspin: multiroom audio with Music Assistant
+# Sendspin multiroom audio with Music Assistant
 
-> New in 0.14.5. Tested on an Echo (2nd generation) and an Echo Dot with
+The community fork verified native playback and voice stop/restart on one
+full-size Echo 2 using 0.15.1. A two-speaker group sounded aligned after a
+fresh group start. Alignment over longer sessions and measured offsets are
+open validation items for this fork. 0.16.3 carries the recovery changes.
+See the [fork release history](../community/RELEASE_HISTORY.md).
+
+> Upstream introduced Sendspin in 0.14.5 and tested it on an Echo (2nd generation) and an Echo Dot with
 > Music Assistant 2.10.8: discovery, token pairing, grouping, play, pause,
 > seek, leave/rejoin, volume and mute.
 
@@ -55,9 +61,9 @@ The speaker only plays for a server it is paired with.
 ## Using it
 
 - **Groups.** Create a group of Sendspin players in Music Assistant. Each
-  LibreEcho speaker corrects for its own output delay (including its speaker
-  processing), so grouped speakers play together: an Echo (2nd generation)
-  and an Echo Dot side by side measured within 0.05 ms of each other.
+  LibreEcho speaker corrects for its own output delay, including speaker
+  processing. The upstream test measured a full-size Echo 2 and an Echo Dot
+  within 0.05 ms of one another in a side-by-side setup.
 - **Starting.** Playback starts about 1.5 seconds after you press play,
   mostly while the speaker's amplifier powers up. A seek, or a resume within
   a few seconds of pausing, is quicker (about half a second) because the

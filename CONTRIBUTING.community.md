@@ -50,8 +50,10 @@ redacted logs for hardware claims.
 
 Use the [Echo 2 release history](docs/community/RELEASE_HISTORY.md) for the
 build-specific evidence. The 0.16.3 OTA and one iPhone intercom call passed
-on one full-size Echo 2. Keep automated checks, hardware trials, and wider
-release qualification distinct. The early radio pause/parent-death race
+on one full-size Echo 2. The [roadmap](docs/community/ROADMAP.md) tracks the
+remaining install, Sendspin and room-to-room intercom checks. Before sharing
+results, replace household names, private addresses and identifiers with
+generic examples. The early radio pause/parent-death race
 still requires separate verification.
 
 Documentation-only publication commits may sit above the source commits used
