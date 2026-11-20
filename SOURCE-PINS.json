@@ -1,21 +1,21 @@
 {
-  "version": "0.16.0",
+  "version": "0.16.1",
   "target": "radar_puffin",
-  "build": "radar-puffin-build-fcf7294-dd99ec42a8efa7cd-2026111923020004",
+  "build": "radar-puffin-build-fcf7294-c719fec4016562fa-2026112000023083",
   "sources": {
     "linux": "5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0",
     "platform": "6989f31f364287f53a6fc5570953a9493e4489eb",
     "product": "595daa2a723f84204cd9cd6d5256ab0eab0ea10c",
-    "ui": "e2a7e4685ab1e54762f45c842ec41f35eeb01f70"
+    "ui": "a45745e554f392b263084fbdcc534e5da3443731"
   },
   "source_links": {
     "product": "https://github.com/sn45k58myn-dev/LibreEcho/commit/595daa2a723f84204cd9cd6d5256ab0eab0ea10c",
-    "ui": "https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/e2a7e4685ab1e54762f45c842ec41f35eeb01f70",
+    "ui": "https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/a45745e554f392b263084fbdcc534e5da3443731",
     "platform": "https://github.com/sn45k58myn-dev/LibreEcho-Platform/commit/6989f31f364287f53a6fc5570953a9493e4489eb",
     "linux": "https://github.com/sn45k58myn-dev/LibreEcho-Linux/commit/5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0"
   },
   "firmware_distributed": false,
-  "initial_install_sha256": "d086b65ab95cdc0269b263052bed6e56a87542ce3adee7703417bba2142b818e",
-  "validation": "Signed OTA and startup passed. The initial iPhone trials exposed a persistent-settings mismatch and phone audio interruptions. Two-way audio was unconfirmed on this build.",
+  "initial_install_sha256": "f117c7a7ceec158d5bd2d42801108068f3cdf5bf75260e88ad86dd1d92f883f1",
+  "validation": "Focused tests, signed image checks and read-only preflight passed. The candidate stayed at preparation stage and was skipped in the hardware update sequence.",
   "source_identity_note": "Public source commit IDs reflect an authorship metadata cleanup. The source files match the inputs of the tested firmware."
 }
