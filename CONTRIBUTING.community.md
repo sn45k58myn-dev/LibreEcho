@@ -48,11 +48,11 @@ image/installer validation, or an observation on named physical hardware.
 Include device model, board revision, build identity, test conditions and
 redacted logs for hardware claims.
 
-The existing personal `0.15.0` Echo 2 candidate is
-**`PREPARED_NOT_FLASHED`**. Its passing automated checks do not establish
-physical boot, audio, privacy controls, wake-word pickup or recovery. The
-remaining early radio pause/parent-death race is not fixed merely because the
-established-playback test passes.
+Use the [Echo 2 release history](docs/community/RELEASE_HISTORY.md) for the
+build-specific evidence. The 0.16.3 OTA and one iPhone intercom call passed
+on one full-size Echo 2. Keep automated checks, hardware trials, and wider
+release qualification distinct. The early radio pause/parent-death race
+still requires separate verification.
 
 Documentation-only publication commits may sit above the source commits used
 to build a candidate. Preserve and identify those frozen build inputs; do

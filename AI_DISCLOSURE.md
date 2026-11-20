@@ -13,17 +13,14 @@ explanations. Passing tests does not remove those possibilities.
 
 ## What has been demonstrated
 
-The personal `0.15.0` Echo 2 candidate was built from recorded source commits.
-Its evidence records passing source tests, supplemental checks, independent
-image verification, signature checks and local-file installer validation.
-The candidate's status is **`PREPARED_NOT_FLASHED`**.
+The [Echo 2 release history](docs/community/RELEASE_HISTORY.md) records the
+exact sources and checks for each firmware build. One full-size Echo 2 passed
+initial installation on 0.15.0, native Sendspin playback on 0.15.1, and signed
+OTA plus one two-way iPhone call on 0.16.3. The fresh 0.16.3 install bundle passed
+local preparation checks and awaits a separate hardware trial.
 
-Those checks establish the outcomes named in their reports. They do not
-establish a successful boot on a physical Echo, audible playback, microphone
-quality, wake-word accuracy, electrical safety, recovery success, or reliable
-operation in a home. AI review is not independent human hardware validation.
-Do not describe the candidate as hardware-tested, production-ready or safe
-for every device based on these reports.
+Apply each result to the named build, hardware, and test conditions. Wider
+compatibility and reliability claims require separate physical tests.
 
 A known radio startup/pause race remains: pausing before the first PCM output
 can stop a child before its parent-death guard is armed. The established

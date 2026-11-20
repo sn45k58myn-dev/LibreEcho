@@ -14,6 +14,8 @@ LibreEcho release and is not endorsed by upstream or Amazon. Read
 
 ## Source and hardware status
 
+See the [Echo 2 release history](docs/community/RELEASE_HISTORY.md) for all six builds, their exact source commits and their hardware test status.
+
 [**0.16.3 source and hardware results**](docs/community/0.16.3.md) covers the full-size
 Echo 2nd Generation (Radar/Puffin). It includes native Sendspin and local phone
 intercom. Signed OTA and one two-way iPhone intercom call passed on one Echo 2.

@@ -1,9 +1,10 @@
 # Experimental hardware and software disclaimer
 
 **This is an independent, experimental community fork. It includes
-AI-assisted additions. Use it at your own risk. The personal `0.15.0` Echo 2
-candidate is `PREPARED_NOT_FLASHED`; physical hardware acceptance has not been
-established.**
+AI-assisted additions. Use it at your own risk.** The
+[Echo 2 release history](docs/community/RELEASE_HISTORY.md) records the checks
+completed for each version. The signed 0.16.3 OTA and a two-way iPhone call
+passed on one full-size Echo 2.
 
 Read this document together with [AI_DISCLOSURE.md](AI_DISCLOSURE.md),
 [ATTRIBUTION.md](ATTRIBUTION.md), the applicable licenses, and the instructions

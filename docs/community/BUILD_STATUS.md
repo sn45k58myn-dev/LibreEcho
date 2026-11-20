@@ -1,5 +1,7 @@
 # Frozen candidate and publication status
 
+The [Echo 2 release history](RELEASE_HISTORY.md) documents the progression from the first install to Sendspin recovery and two-way iPhone calling.
+
 The current [0.16.3 source and hardware results](0.16.3.md) record the tested
 Echo 2 OTA and one successful iPhone intercom call. The sections below are the
 historical publication record for the original 0.15.0 build.
