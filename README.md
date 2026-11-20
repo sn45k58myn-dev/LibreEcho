@@ -1,26 +1,26 @@
-# Echo 2 0.15.0 · First Echo 2 build
+# Echo 2 0.15.1 · Native Sendspin recovery
 
 For the full-size Amazon Echo 2nd Generation (2017), Radar/Puffin.
 
 ## Changes
 
-- Added optional Home Assistant listening chimes and fixed silent voice turns and HTTP request cleanup.
-- Built the personal signed firmware and five matching feature packs.
+- Preserved Sendspin lifecycle replies through speaker engine recovery.
+- Added real SDK and sink regression coverage for resuming, skipping and two-player timing.
 
 ## Validation
 
-Initial installation, boot and owner setup passed on one full-size Echo 2. Native Sendspin playback was unreliable, so AirPlay served as the temporary music route.
+Signed OTA passed on the same Echo. The owner verified native playback, voice stop and restart, and judged two-speaker playback aligned after a fresh group start. Acoustic offset and long-duration sync were unmeasured.
 
 ## Exact build sources
 
 Public source commit IDs reflect an authorship metadata cleanup. The source files match the inputs of the tested firmware.
 
-Build `radar-puffin-build-6059a7e-20ee4e9eea21de8a-2026111822324915`.
+Build `radar-puffin-build-ebca7eb-6cbe12b1742fc622-2026111921451769`.
 
 | Component | Commit |
 | --- | --- |
-| Product | [`6059a7ea6fd14ee32621d6c61fb13add523e66f8`](https://github.com/sn45k58myn-dev/LibreEcho/commit/6059a7ea6fd14ee32621d6c61fb13add523e66f8) |
-| UI | [`7119e28fc7464c321375f5b5df9d95c0051d3929`](https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/7119e28fc7464c321375f5b5df9d95c0051d3929) |
+| Product | [`dc560d5b57a533888c8558217ae9bf57271ebc62`](https://github.com/sn45k58myn-dev/LibreEcho/commit/dc560d5b57a533888c8558217ae9bf57271ebc62) |
+| UI | [`4e38d3b45fe110242d79a54e6274093318f2d6a0`](https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/4e38d3b45fe110242d79a54e6274093318f2d6a0) |
 | Platform | [`99197eff816d2696cc8760a4a1cd86cc4fe216b0`](https://github.com/sn45k58myn-dev/LibreEcho-Platform/commit/99197eff816d2696cc8760a4a1cd86cc4fe216b0) |
 | Linux | [`5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0`](https://github.com/sn45k58myn-dev/LibreEcho-Linux/commit/5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0) |
 

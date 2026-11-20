@@ -1,21 +1,21 @@
 {
-  "version": "0.15.0",
+  "version": "0.15.1",
   "target": "radar_puffin",
-  "build": "radar-puffin-build-6059a7e-20ee4e9eea21de8a-2026111822324915",
+  "build": "radar-puffin-build-ebca7eb-6cbe12b1742fc622-2026111921451769",
   "sources": {
-    "product": "6059a7ea6fd14ee32621d6c61fb13add523e66f8",
-    "platform": "99197eff816d2696cc8760a4a1cd86cc4fe216b0",
     "linux": "5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0",
-    "ui": "7119e28fc7464c321375f5b5df9d95c0051d3929"
+    "platform": "99197eff816d2696cc8760a4a1cd86cc4fe216b0",
+    "product": "dc560d5b57a533888c8558217ae9bf57271ebc62",
+    "ui": "4e38d3b45fe110242d79a54e6274093318f2d6a0"
   },
   "source_links": {
-    "product": "https://github.com/sn45k58myn-dev/LibreEcho/commit/6059a7ea6fd14ee32621d6c61fb13add523e66f8",
-    "ui": "https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/7119e28fc7464c321375f5b5df9d95c0051d3929",
+    "product": "https://github.com/sn45k58myn-dev/LibreEcho/commit/dc560d5b57a533888c8558217ae9bf57271ebc62",
+    "ui": "https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/4e38d3b45fe110242d79a54e6274093318f2d6a0",
     "platform": "https://github.com/sn45k58myn-dev/LibreEcho-Platform/commit/99197eff816d2696cc8760a4a1cd86cc4fe216b0",
     "linux": "https://github.com/sn45k58myn-dev/LibreEcho-Linux/commit/5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0"
   },
   "firmware_distributed": false,
-  "initial_install_sha256": "5f68596771837020bb2a8bdce93765510b418a86f17fe3a3cebd586080e113b9",
-  "validation": "Initial installation, boot and owner setup passed on one full-size Echo 2. Native Sendspin playback was unreliable, so AirPlay served as the temporary music route.",
+  "initial_install_sha256": "d6ba65a47f8ee882c8b70fd6b0a508d3d0230af017564b81e3a4d3850fd13344",
+  "validation": "Signed OTA passed on the same Echo. The owner verified native playback, voice stop and restart, and judged two-speaker playback aligned after a fresh group start. Acoustic offset and long-duration sync were unmeasured.",
   "source_identity_note": "Public source commit IDs reflect an authorship metadata cleanup. The source files match the inputs of the tested firmware."
 }
