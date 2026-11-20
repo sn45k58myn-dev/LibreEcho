@@ -1,21 +1,21 @@
 {
-  "version": "0.15.1",
+  "version": "0.16.0",
   "target": "radar_puffin",
-  "build": "radar-puffin-build-ebca7eb-6cbe12b1742fc622-2026111921451769",
+  "build": "radar-puffin-build-fcf7294-dd99ec42a8efa7cd-2026111923020004",
   "sources": {
     "linux": "5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0",
-    "platform": "99197eff816d2696cc8760a4a1cd86cc4fe216b0",
-    "product": "dc560d5b57a533888c8558217ae9bf57271ebc62",
-    "ui": "4e38d3b45fe110242d79a54e6274093318f2d6a0"
+    "platform": "6989f31f364287f53a6fc5570953a9493e4489eb",
+    "product": "595daa2a723f84204cd9cd6d5256ab0eab0ea10c",
+    "ui": "e2a7e4685ab1e54762f45c842ec41f35eeb01f70"
   },
   "source_links": {
-    "product": "https://github.com/sn45k58myn-dev/LibreEcho/commit/dc560d5b57a533888c8558217ae9bf57271ebc62",
-    "ui": "https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/4e38d3b45fe110242d79a54e6274093318f2d6a0",
-    "platform": "https://github.com/sn45k58myn-dev/LibreEcho-Platform/commit/99197eff816d2696cc8760a4a1cd86cc4fe216b0",
+    "product": "https://github.com/sn45k58myn-dev/LibreEcho/commit/595daa2a723f84204cd9cd6d5256ab0eab0ea10c",
+    "ui": "https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/e2a7e4685ab1e54762f45c842ec41f35eeb01f70",
+    "platform": "https://github.com/sn45k58myn-dev/LibreEcho-Platform/commit/6989f31f364287f53a6fc5570953a9493e4489eb",
     "linux": "https://github.com/sn45k58myn-dev/LibreEcho-Linux/commit/5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0"
   },
   "firmware_distributed": false,
-  "initial_install_sha256": "d6ba65a47f8ee882c8b70fd6b0a508d3d0230af017564b81e3a4d3850fd13344",
-  "validation": "Signed OTA passed on the same Echo. The owner verified native playback, voice stop and restart, and judged two-speaker playback aligned after a fresh group start. Acoustic offset and long-duration sync were unmeasured.",
+  "initial_install_sha256": "d086b65ab95cdc0269b263052bed6e56a87542ce3adee7703417bba2142b818e",
+  "validation": "Signed OTA and startup passed. The initial iPhone trials exposed a persistent-settings mismatch and phone audio interruptions. Two-way audio was unconfirmed on this build.",
   "source_identity_note": "Public source commit IDs reflect an authorship metadata cleanup. The source files match the inputs of the tested firmware."
 }
