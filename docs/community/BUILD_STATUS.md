@@ -1,5 +1,12 @@
 # Frozen candidate and publication status
 
+The current [0.16.3 source and hardware results](0.16.3.md) record the tested
+Echo 2 OTA and one successful iPhone intercom call. The sections below are the
+historical publication record for the original 0.15.0 build.
+
+## Original 0.15.0 candidate
+
+
 The personal `0.15.0` Echo 2 candidate is **PREPARED_NOT_FLASHED**. This is a
 source-only community publication, not a hardware-qualified firmware release.
 

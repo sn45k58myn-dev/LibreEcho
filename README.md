@@ -14,13 +14,11 @@ LibreEcho release and is not endorsed by upstream or Amazon. Read
 
 ## Source and hardware status
 
-The frozen personal `0.15.0` candidate for the full-size Echo 2nd Generation
-(`radar_puffin`) passed local source tests, cross-compilation, image/signature
-verification and complete installer preparation. It remains
-**`PREPARED_NOT_FLASHED`: no physical boot, audio, microphone or update acceptance.**
-The candidate's original build input for this component is `6059a7ea6fd14ee32621d6c61fb13add523e66f8`.
-Publication documentation is added above those frozen inputs; an existing binary
-is not relabelled as a build of the publication commit.
+[**0.16.3 source and hardware results**](docs/community/0.16.3.md) covers the full-size
+Echo 2nd Generation (Radar/Puffin). It includes native Sendspin and local phone
+intercom. Signed OTA and one two-way iPhone intercom call passed on one Echo 2.
+The linked record gives exact build inputs and the scope of each test.
+
 
 Echo Dot 2 support is inherited from upstream and has not been qualified in this
 fork. **Echo 3, Echo Studio and additional boards are research targets only:
