@@ -1,21 +1,21 @@
 {
-  "version": "0.16.2",
+  "version": "0.16.3",
   "target": "radar_puffin",
-  "build": "radar-puffin-build-fcf7294-45e73d6e565f2c80-2026112000195260",
+  "build": "radar-puffin-build-fcf7294-80e7bdd1bc59720b-2026112001052454",
   "sources": {
     "linux": "5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0",
     "platform": "6989f31f364287f53a6fc5570953a9493e4489eb",
     "product": "595daa2a723f84204cd9cd6d5256ab0eab0ea10c",
-    "ui": "cb7e974490cdcbfb8056df15bdfac60bddc7ea0e"
+    "ui": "527a53de615400b82b64d3ae7853b05364c23708"
   },
   "source_links": {
     "product": "https://github.com/sn45k58myn-dev/LibreEcho/commit/595daa2a723f84204cd9cd6d5256ab0eab0ea10c",
-    "ui": "https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/cb7e974490cdcbfb8056df15bdfac60bddc7ea0e",
+    "ui": "https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/527a53de615400b82b64d3ae7853b05364c23708",
     "platform": "https://github.com/sn45k58myn-dev/LibreEcho-Platform/commit/6989f31f364287f53a6fc5570953a9493e4489eb",
     "linux": "https://github.com/sn45k58myn-dev/LibreEcho-Linux/commit/5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0"
   },
   "firmware_distributed": false,
-  "initial_install_sha256": "0e591a868a0e975dc70865c15c6a974d57c63d2ecb93d7dba32ebbcef95ff46a",
-  "validation": "Signed OTA from 0.16.0 passed and Home Assistant reconnected. The subsequent iPhone call reached the Echo and played its cue, then disconnected.",
+  "initial_install_sha256": "095f54fd928d081ac60cd6232b7ea7de12c8a04f7bda94ff89378178ac6d80f7",
+  "validation": "Signed OTA and startup passed. One foreground iPhone Safari call had audible audio in both directions. The Echo released the audio connection when the call ended. A fresh 0.16.3 installation still awaits a hardware test.",
   "source_identity_note": "Public source commit IDs reflect an authorship metadata cleanup. The source files match the inputs of the tested firmware."
 }

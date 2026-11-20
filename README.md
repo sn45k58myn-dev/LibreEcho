@@ -1,26 +1,26 @@
-# Echo 2 0.16.2 · Phone audio recovery
+# Echo 2 0.16.3 · Verified two-way iPhone intercom
 
 For the full-size Amazon Echo 2nd Generation (2017), Radar/Puffin.
 
 ## Changes
 
-- Included the persistent-settings fix and tolerated brief phone audio scheduling delays.
-- Added coverage for repeated stalls and recovery with fixed buffer limits.
+- Kept intercom calls open through brief speaker audio startup stalls and retained a timeout for sustained stalls.
+- Included the earlier Sendspin recovery and persistent intercom settings changes.
 
 ## Validation
 
-Signed OTA from 0.16.0 passed and Home Assistant reconnected. The subsequent iPhone call reached the Echo and played its cue, then disconnected.
+Signed OTA and startup passed. One foreground iPhone Safari call had audible audio in both directions. The Echo released the audio connection when the call ended. A fresh 0.16.3 installation still awaits a hardware test.
 
 ## Exact build sources
 
 Public source commit IDs reflect an authorship metadata cleanup. The source files match the inputs of the tested firmware.
 
-Build `radar-puffin-build-fcf7294-45e73d6e565f2c80-2026112000195260`.
+Build `radar-puffin-build-fcf7294-80e7bdd1bc59720b-2026112001052454`.
 
 | Component | Commit |
 | --- | --- |
 | Product | [`595daa2a723f84204cd9cd6d5256ab0eab0ea10c`](https://github.com/sn45k58myn-dev/LibreEcho/commit/595daa2a723f84204cd9cd6d5256ab0eab0ea10c) |
-| UI | [`cb7e974490cdcbfb8056df15bdfac60bddc7ea0e`](https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/cb7e974490cdcbfb8056df15bdfac60bddc7ea0e) |
+| UI | [`527a53de615400b82b64d3ae7853b05364c23708`](https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/527a53de615400b82b64d3ae7853b05364c23708) |
 | Platform | [`6989f31f364287f53a6fc5570953a9493e4489eb`](https://github.com/sn45k58myn-dev/LibreEcho-Platform/commit/6989f31f364287f53a6fc5570953a9493e4489eb) |
 | Linux | [`5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0`](https://github.com/sn45k58myn-dev/LibreEcho-Linux/commit/5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0) |
 
