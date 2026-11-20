@@ -1,21 +1,21 @@
 {
-  "version": "0.16.1",
+  "version": "0.16.2",
   "target": "radar_puffin",
-  "build": "radar-puffin-build-fcf7294-c719fec4016562fa-2026112000023083",
+  "build": "radar-puffin-build-fcf7294-45e73d6e565f2c80-2026112000195260",
   "sources": {
     "linux": "5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0",
     "platform": "6989f31f364287f53a6fc5570953a9493e4489eb",
     "product": "595daa2a723f84204cd9cd6d5256ab0eab0ea10c",
-    "ui": "a45745e554f392b263084fbdcc534e5da3443731"
+    "ui": "cb7e974490cdcbfb8056df15bdfac60bddc7ea0e"
   },
   "source_links": {
     "product": "https://github.com/sn45k58myn-dev/LibreEcho/commit/595daa2a723f84204cd9cd6d5256ab0eab0ea10c",
-    "ui": "https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/a45745e554f392b263084fbdcc534e5da3443731",
+    "ui": "https://github.com/sn45k58myn-dev/LibreEcho-UI/commit/cb7e974490cdcbfb8056df15bdfac60bddc7ea0e",
     "platform": "https://github.com/sn45k58myn-dev/LibreEcho-Platform/commit/6989f31f364287f53a6fc5570953a9493e4489eb",
     "linux": "https://github.com/sn45k58myn-dev/LibreEcho-Linux/commit/5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0"
   },
   "firmware_distributed": false,
-  "initial_install_sha256": "f117c7a7ceec158d5bd2d42801108068f3cdf5bf75260e88ad86dd1d92f883f1",
-  "validation": "Focused tests, signed image checks and read-only preflight passed. The candidate stayed at preparation stage and was skipped in the hardware update sequence.",
+  "initial_install_sha256": "0e591a868a0e975dc70865c15c6a974d57c63d2ecb93d7dba32ebbcef95ff46a",
+  "validation": "Signed OTA from 0.16.0 passed and Home Assistant reconnected. The subsequent iPhone call reached the Echo and played its cue, then disconnected.",
   "source_identity_note": "Public source commit IDs reflect an authorship metadata cleanup. The source files match the inputs of the tested firmware."
 }
