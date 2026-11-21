@@ -1,0 +1,10 @@
+#!/bin/sh
+# Keep the pinned image driver's flags and allow owner-selected worker counts
+# for the reduced wake-word runtime. Other commands use the existing mirror.
+if [ "$#" -eq 4 ] && [ "$1" = --build ] && [ "$3" = --parallel ]; then
+    case "$2" in
+        */onnxruntime-wake-reduced)
+            exec /usr/bin/cmake --build "$2" --parallel "${LIBREECHO_BUILD_JOBS:-$4}" ;;
+    esac
+fi
+exec /build/tmp-other/host-bin/cmake "$@"

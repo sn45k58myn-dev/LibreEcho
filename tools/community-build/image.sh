@@ -10,8 +10,9 @@ export LIBREECHO_REUSE_COMPONENT_CACHE=1 GIT_OPTIONAL_LOCKS=0 PYTHONDONTWRITEBYT
 export RUNNER_TEMP=/build/runtime GITHUB_WORKSPACE=/build
 export GITHUB_PATH="$RUNNER_TEMP/github-path" GITHUB_OUTPUT="$RUNNER_TEMP/github-output"
 install -d -m 0700 /scratch "$RUNNER_TEMP"
+install -D -m0755 "$recipe/cmake-for-image" "$RUNNER_TEMP/image-bin/cmake"
 export TMPDIR=/scratch LE_AUDIO_ENGINE_SENDPIN_FIXTURE_ROOT=/scratch/ase LE_AUDIO_ENGINE_SENDPIN_SCRATCH_ROOT=/scratch
-export PATH="$deps/ota-build-venv/bin:$deps/host-bin:$deps/armhf-cross-shim:$PATH"
+export PATH="$deps/ota-build-venv/bin:$RUNNER_TEMP/image-bin:$deps/host-bin:$deps/armhf-cross-shim:$PATH"
 export LD_LIBRARY_PATH="$deps/armhf-root/usr/lib/x86_64-linux-gnu:$deps/host-bin"
 bash "$recipe/bootstrap.sh" --anchors-only
 export LIBREECHO_MUSL_SYSROOT=/build/toolchain LIBREECHO_OTA_MUSL_NATIVE_ROOT=/build/toolchain LIBREECHO_OTA_MUSL_SYSROOT=/build/toolchain

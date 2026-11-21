@@ -14,7 +14,7 @@ bash tools/community-build/build.sh
 
 The command creates a local Docker build volume, fetches and checks the source commits and trees, prepares the compilers and dependencies, and builds the image and five feature packages. The last stage checks the signed OTA and prepares the initial-install bundle using the matching installer without accessing hardware. A successful run prints the output directory. Pass a directory as the single argument to select another destination.
 
-Dependency compilation defaults to two parallel jobs. On a machine with spare CPU and memory, set `LIBREECHO_BUILD_JOBS=4` before the command to use four. The pinned firmware build sets its own parallelism.
+The compiler and neural runtimes default to two parallel jobs. On a machine with spare CPU and memory, prefix the build command with `LIBREECHO_BUILD_JOBS=4` to use four for these stages.
 
 For the initial publication, all four source checkouts and the 67-entry public input inventory have been verified from an empty build volume. Full image and first-install verification are in progress for the new owner-key recipe. The previously tested firmware and its hardware results are recorded in the [0.16.8 build record](0.16.8.md).
 
@@ -27,6 +27,8 @@ For the initial publication, all four source checkouts and the 67-entry public i
 ## Use on the next speaker
 
 Use the **initial-install** bundle for a compatible, prepared full-size Echo 2. An Echo still on factory software must separately meet the installer's model and boot-environment requirements. This build command does not put a factory speaker into that state. Another Echo can start directly on 0.16.8. On first boot, create its own owner account and configure the speaker's pairing and certificate. [First-install and intercom guide](0.16.8.md#use-0168-on-the-next-echo-2)
+
+The Wake Word page lists **Alexa** as the stock on-device detector. If you configure Home Assistant to handle wake detection, the wake phrase comes from the speaker's assigned Assist pipeline. Uploading a model to the speaker only affects on-device detection. [Wake detection modes in 0.16.8](https://github.com/sn45k58myn-dev/LibreEcho-UI/blob/984ebc22cf68f1900e931d1129357db91951ea06/docs/HOME_ASSISTANT_VOICE.md#server-side-wake-word-optional-off-by-default)
 
 ## Source and dependency provenance
 

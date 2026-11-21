@@ -55,7 +55,7 @@ docker volume create "$volume" >/dev/null
 common=(--rm --platform linux/amd64 --mount "type=volume,src=$volume,dst=/build" --mount "type=bind,src=$recipe,dst=/recipe,readonly")
 lock=(flock --exclusive /build/community-build.lock)
 docker run "${common[@]}" -e "JOBS=$jobs" "$image" "${lock[@]}" bash -ec 'bash /recipe/sources.sh; bash /recipe/bootstrap.sh'
-docker run "${common[@]}" --network none --mount "type=bind,src=$seed,dst=/owner/ota-seed.hex,readonly" \
+docker run "${common[@]}" --network none -e "LIBREECHO_BUILD_JOBS=$jobs" --mount "type=bind,src=$seed,dst=/owner/ota-seed.hex,readonly" \
     --mount "type=bind,src=$output,dst=/out" -e "OUTPUT_UID=$(id -u)" -e "OUTPUT_GID=$(id -g)" \
     "$image" "${lock[@]}" bash /recipe/image.sh
 printf 'Verified release directory under %s\n' "$output"
