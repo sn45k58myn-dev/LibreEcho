@@ -49,13 +49,18 @@ else:
         os.link(temporary.name, p)
     print("Created your OTA signing key. Back it up privately before using the firmware.")
 PY
-# The build context contains only the public recipe, with no output or host key.
-docker build --platform linux/amd64 -t "$image" "$recipe"
+# Record the immutable image ID so both stages keep the same recipe even if
+# another checkout builds the same tag or the host files change mid-build.
+iid_file=$(mktemp "$state/.builder-image.XXXXXXXX")
+trap 'rm -f -- "$iid_file"' EXIT
+docker build --platform linux/amd64 --iidfile "$iid_file" -t "$image" "$recipe"
+image_id=$(<"$iid_file")
+[[ $image_id =~ ^sha256:[0-9a-f]{64}$ ]] || { echo 'Docker did not record a builder image ID.' >&2; exit 1; }
 docker volume create "$volume" >/dev/null
-common=(--rm --platform linux/amd64 --mount "type=volume,src=$volume,dst=/build" --mount "type=bind,src=$recipe,dst=/recipe,readonly")
+common=(--rm --platform linux/amd64 --mount "type=volume,src=$volume,dst=/build")
 lock=(flock --exclusive /build/community-build.lock)
-docker run "${common[@]}" -e "JOBS=$jobs" "$image" "${lock[@]}" bash -ec 'bash /recipe/sources.sh; bash /recipe/bootstrap.sh'
+docker run "${common[@]}" -e "JOBS=$jobs" "$image_id" "${lock[@]}" bash -ec 'bash /recipe/sources.sh; bash /recipe/bootstrap.sh'
 docker run "${common[@]}" --network none -e "LIBREECHO_BUILD_JOBS=$jobs" --mount "type=bind,src=$seed,dst=/owner/ota-seed.hex,readonly" \
     --mount "type=bind,src=$output,dst=/out" -e "OUTPUT_UID=$(id -u)" -e "OUTPUT_GID=$(id -g)" \
-    "$image" "${lock[@]}" bash /recipe/image.sh
+    "$image_id" "${lock[@]}" bash /recipe/image.sh
 printf 'Verified release directory under %s\n' "$output"

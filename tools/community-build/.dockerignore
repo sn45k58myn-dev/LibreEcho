@@ -1,2 +1,14 @@
 **
 !Dockerfile
+!bootstrap.sh
+!cmake-for-image
+!cmake-with-ort-mirror
+!image.sh
+!package.sh
+!prepare-ort.py
+!prepare-wake-deps.py
+!sources.sh
+!stage-key.py
+!stage-sources.py
+!verify.py
+!workflow-step.py

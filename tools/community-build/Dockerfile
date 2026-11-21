@@ -13,3 +13,4 @@ RUN apt-get update \
  && /usr/bin/python3 -c 'import yaml' \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /build
+COPY bootstrap.sh cmake-for-image cmake-with-ort-mirror image.sh package.sh prepare-ort.py prepare-wake-deps.py sources.sh stage-key.py stage-sources.py verify.py workflow-step.py /recipe/
