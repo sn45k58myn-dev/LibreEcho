@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 import re
+import shlex
 import socket
 import subprocess
 import sys
@@ -40,6 +41,8 @@ def main():
     parser.add_argument("--model", type=Path, help="Local owner-provided ONNX classifier")
     parser.add_argument("--context", choices=("quiet", "music"))
     parser.add_argument("--seconds", type=int, default=90)
+    parser.add_argument("--trial-sensitivity", type=int, choices=range(101), metavar="0..100",
+                        help="Override only the temporary decoder's sensitivity")
     args = parser.parse_args()
     if not 5 <= args.seconds <= 120:
         parser.error("choose a duration of 5 to 120 seconds")
@@ -63,6 +66,9 @@ def main():
           f"derived threshold {threshold:.4f}, VAD floor {floor}.", flush=True)
     if args.preflight:
         return 0
+    if args.trial_sensitivity is not None:
+        threshold = 0.85 - args.trial_sensitivity * 0.0044
+        print(f"Temporary sensitivity {args.trial_sensitivity}, threshold {threshold:.4f}.", flush=True)
     if not (args.binary and args.binary.is_file() and args.model and args.model.is_file() and args.context):
         parser.error("a trial requires --binary, --model and --context")
     if not 0 < args.model.stat().st_size <= 8 * 1024 * 1024:
@@ -79,9 +85,18 @@ def main():
         binary = directory + "/wake-trial"
         adb("push", str(args.binary), binary)
         adb("shell", "chmod", "700", binary)
-        return subprocess.run([*command, "shell", binary, model_dir, str(args.seconds),
-                               args.context, f"{threshold:.4f}", str(floor)],
-                              timeout=args.seconds + 35).returncode
+        # Older ADB shell transports can return zero when the remote process failed.
+        # Keep stdout live for the listener and verify success separately.
+        invocation = shlex.join([binary, model_dir, str(args.seconds), args.context,
+                                 f"{threshold:.4f}", str(floor)])
+        marker = directory + "/completed"
+        result = subprocess.run([*command, "shell", invocation + " && echo complete > " + marker],
+                                timeout=args.seconds + 35)
+        if result.returncode:
+            return result.returncode
+        if adb("shell", "if test -f " + marker + "; then cat " + marker + "; fi").strip() != "complete":
+            raise ValueError("The device did not complete a valid trial. Check its diagnostic output.")
+        return 0
     finally:
         adb("shell", "rm", "-rf", directory)
 

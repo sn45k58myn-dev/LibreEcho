@@ -16,15 +16,18 @@ fi
 }
 mkdir -p -- "$out"
 out=$(cd -- "$out" && pwd -P)
-iid=$(mktemp)
-trap 'rm -f -- "$iid"' EXIT
-docker build --platform linux/amd64 --iidfile "$iid" "$recipe"
-image=$(<"$iid")
+state=$(mktemp -d)
+trap 'rm -rf -- "$state"' EXIT
+install -m 0644 "$recipe/wake-trial-container.sh" "$state/trial.sh"
+docker build --platform linux/amd64 --iidfile "$state/image-id" "$recipe"
+image=$(<"$state/image-id")
+[[ $image =~ ^sha256:[0-9a-f]{64}$ ]] || { echo 'Docker did not return an image ID.' >&2; exit 1; }
 common=(--rm --platform linux/amd64 -e "JOBS=$jobs"
-    --mount "type=volume,src=$deps_volume,dst=/build"
     --mount "type=volume,src=$dev_volume,dst=/work"
-    --mount "type=bind,src=$recipe/wake-trial-container.sh,dst=/trial.sh,readonly")
-lock=(flock --exclusive /build/community-build.lock flock --exclusive /work/trial.lock)
-docker run "${common[@]}" "$image" "${lock[@]}" bash -ec 'bash /recipe/sources.sh; bash /recipe/bootstrap.sh; bash /trial.sh fetch'
-docker run "${common[@]}" --network none --mount "type=bind,src=$out,dst=/out" \
-    -e "OUTPUT_UID=$(id -u)" -e "OUTPUT_GID=$(id -g)" "$image" "${lock[@]}" bash /trial.sh compile
+    --mount "type=bind,src=$state/trial.sh,dst=/trial.sh,readonly")
+work_lock=(flock --exclusive /work/trial.lock)
+docker run "${common[@]}" --mount "type=volume,src=$deps_volume,dst=/build" \
+    "$image" flock --exclusive /build/community-build.lock "${work_lock[@]}" bash -ec 'bash /recipe/sources.sh; bash /recipe/bootstrap.sh; bash /trial.sh fetch'
+docker run "${common[@]}" --network none --mount "type=volume,src=$deps_volume,dst=/build,readonly" \
+    --mount "type=bind,src=$out,dst=/out" \
+    -e "OUTPUT_UID=$(id -u)" -e "OUTPUT_GID=$(id -g)" "$image" flock --shared /build/community-build.lock "${work_lock[@]}" bash /trial.sh compile
