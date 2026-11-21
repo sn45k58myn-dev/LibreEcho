@@ -1,0 +1,40 @@
+{
+  "version": "0.16.8",
+  "target": "radar_puffin",
+  "build": "radar-puffin-build-fcf7294-05f089e69aa58d97-2026112114262398",
+  "sources": {
+    "product": {
+      "repository": "sn45k58myn-dev/LibreEcho",
+      "commit": "595daa2a723f84204cd9cd6d5256ab0eab0ea10c",
+      "tree": "055071bc31ec3467e149ddd04dc2ec4c0c0e7996"
+    },
+    "ui": {
+      "repository": "sn45k58myn-dev/LibreEcho-UI",
+      "commit": "984ebc22cf68f1900e931d1129357db91951ea06",
+      "tree": "41b650f94bd108acb2c57e6c073712cf70ce8dd6"
+    },
+    "platform": {
+      "repository": "sn45k58myn-dev/LibreEcho-Platform",
+      "commit": "160dd390362a1e322c8799b4be0ac3dd21f982a6",
+      "tree": "14023617ec1e06167bd9ee35f7f70db369ad2a92"
+    },
+    "linux": {
+      "repository": "aslater3/LibreEcho-Linux",
+      "commit": "5bc811d3cd7091e8d70f9faa0bc12c5cf4e77ae0",
+      "tree": "a00c937c9ad7968de46ec5b8d08857b0c89a3fb7"
+    }
+  },
+  "signed_ota_sha256": "10ac443c5fd2ec84b2c09da52b3ab2fc443760df59d0abfae37ed78903d38a0f",
+  "signed_initial_install_sha256": "7f23f1d9987b747cab8b29368feeb720e559a4c1143f6274bae1ef59a2d71007",
+  "checks": {
+    "initial_install_preparation": "passed offline",
+    "fresh_0_16_8_install_on_second_device": "untested",
+    "signed_ota_startup": "confirmed on one full-size Echo 2",
+    "feature_pairs_verified": 5,
+    "sendspin": "listener available after OTA",
+    "home_assistant": "reconnected after OTA",
+    "intercom": "iPhone caller reported less echo in a normal call",
+    "bench_cases_matched": 26,
+    "bench_samples_bit_identical": 314400
+  }
+}
