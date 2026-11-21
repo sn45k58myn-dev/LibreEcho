@@ -54,6 +54,8 @@ CLASSIFIER_INPUT, CLASSIFIER_OUTPUT = "onnx::Flatten_0", "13"
 # on other operators such as ReduceMean and Sqrt (LibreEcho#241), so any model
 # using them is refused here rather than failing on the device.
 CLASSIFIER_OPS = frozenset({"Flatten", "Gemm", "Relu", "Sigmoid"})
+TRIAL_CLASSIFIER_OPS = CLASSIFIER_OPS | {"ReduceMean", "Sub", "Pow", "Add", "Sqrt", "Div", "Mul"}
+PROFILES = ("stable", "local-trial")
 
 # sha256 of the feature models and classifier in the 0.14.x build inputs.
 # Used only to report whether a package matches the stock build.
@@ -101,23 +103,48 @@ def threshold_for(sensitivity):
     return THRESHOLD_BASE - THRESHOLD_PER_SENSITIVITY * sensitivity
 
 
-def check_classifier(path):
+def _check_trial_graph(model):
+    _require(len(model.opset_import) == 1 and model.opset_import[0].version == 13
+             and model.opset_import[0].domain in ("", "ai.onnx"),
+             "local-trial classifiers require default-domain opset 13")
+    _require(all(node.domain in ("", "ai.onnx") for node in model.graph.node),
+             "local-trial classifier nodes must use the default domain")
+    _require(len(model.graph.output) == 1, "classifier must declare exactly one output")
+    output = model.graph.output[0]
+    _require(0 < len(output.name.encode("utf-8")) <= 127 and "\x00" not in output.name,
+             "classifier output name must be 1..127 bytes without NUL")
+    _require(any(node.op_type == "Sigmoid" and output.name in node.output
+                 for node in model.graph.node), "classifier output must be produced by Sigmoid")
+    tensor = output.type.tensor_type
+    _require(tensor.elem_type == onnx.TensorProto.FLOAT and tensor.HasField("shape")
+             and all(dim.HasField("dim_value") and dim.dim_value == 1 for dim in tensor.shape.dim),
+             "classifier output must be a fixed-size tensor containing one float32 score")
+
+
+def check_classifier(path, profile="stable"):
     """Raise CheckError unless the classifier fits the device contract."""
     _require(os.path.isfile(path) and not os.path.islink(path),
              "classifier must be a regular file: %s" % path)
+    _require(profile in PROFILES, "unknown classifier profile: %s" % profile)
+    if profile == "local-trial":
+        _require(1024 <= os.path.getsize(path) <= 8 * 1024 * 1024,
+                 "local-trial classifier size must be 1 KiB..8 MiB")
     model = onnx.load(path, load_external_data=False)
     external = [t.name for t in model.graph.initializer
-                if t.data_location == onnx.TensorProto.EXTERNAL]
+                if t.data_location == onnx.TensorProto.EXTERNAL or t.external_data]
     _require(not external,
              "classifier keeps weights in external data; export one self-contained file")
     domains = {opset.domain for opset in model.opset_import}
     _require(domains <= {"", "ai.onnx"},
              "classifier imports non-default opset domains: %s" % sorted(domains))
+    if profile == "local-trial":
+        _check_trial_graph(model)
+    allowed = TRIAL_CLASSIFIER_OPS if profile == "local-trial" else CLASSIFIER_OPS
     ops = sorted({node.op_type for node in model.graph.node})
-    unsupported = [op for op in ops if op not in CLASSIFIER_OPS]
+    unsupported = [op for op in ops if op not in allowed]
     _require(not unsupported,
-             "classifier uses operators %s; the stock classifier uses only %s"
-             % (unsupported, sorted(CLASSIFIER_OPS)))
+             "classifier uses operators %s outside the %s profile: %s"
+             % (unsupported, profile, sorted(allowed)))
     _require("Sigmoid" in ops,
              "classifier must end in Sigmoid so the score is a 0..1 probability")
 
@@ -128,9 +155,12 @@ def check_classifier(path):
              % (CLASSIFIER_INPUT, [i.name for i in inputs]))
     _require(list(inputs[0].shape) == [1, FEATURE_FRAMES, FEATURE_BINS],
              "classifier input shape must be [1, 16, 96], found %s" % (inputs[0].shape,))
-    _require(len(outputs) == 1 and outputs[0].name == CLASSIFIER_OUTPUT,
-             "classifier output must be named %s, found %s"
-             % (CLASSIFIER_OUTPUT, [o.name for o in outputs]))
+    if profile == "stable":
+        _require(len(outputs) == 1 and outputs[0].name == CLASSIFIER_OUTPUT,
+                 "classifier output must be named %s, found %s"
+                 % (CLASSIFIER_OUTPUT, [o.name for o in outputs]))
+    else:
+        _require(inputs[0].type == "tensor(float)", "classifier input must be float32")
     result = session.run(None, {CLASSIFIER_INPUT: np.zeros((1, FEATURE_FRAMES, FEATURE_BINS), np.float32)})[0]
     value = float(np.asarray(result).reshape(-1)[0]) if np.asarray(result).size == 1 else None
     _require(value is not None and np.isfinite(value) and 0.0 <= value <= 1.0,
@@ -172,10 +202,12 @@ def stock_match(paths):
             for name, path in paths.items()}
 
 
-def package(classifier, name, feature_dir, out_dir, force=False):
+def package(classifier, name, feature_dir, out_dir, force=False, profile="stable"):
     """Validate and install <out_dir>/<name>/ plus <out_dir>/<name>.manifest.json."""
     validate_name(name)
-    check_classifier(classifier)
+    if profile == "local-trial":
+        _require(len(name) < 64, "local-trial model folder names are limited to 63 characters")
+    check_classifier(classifier, profile)
     check_feature_models(feature_dir)
 
     target = os.path.join(out_dir, name)
@@ -214,6 +246,8 @@ def package(classifier, name, feature_dir, out_dir, force=False):
         "onnxruntime": ort.__version__,
         "tool": "tools/wakeword/wakeword_model.py",
     }
+    if profile == "local-trial":
+        manifest["classifier_profile"] = profile
     manifest_path = os.path.join(out_dir, name + ".manifest.json")
     with open(manifest_path, "w", encoding="utf-8") as handle:
         json.dump(manifest, handle, indent=2, sort_keys=True)
@@ -332,6 +366,9 @@ def build_parser():
                         help="folder holding melspectrogram.onnx and embedding_model.onnx")
     p_pack.add_argument("--out", required=True, help="output directory")
     p_pack.add_argument("--force", action="store_true", help="replace an existing package")
+    for command in (p_check, p_pack):
+        command.add_argument("--profile", choices=PROFILES, default="stable",
+                             help="choose local-trial for the experimental device runtime (default: stable)")
 
     p_score = sub.add_parser("score", help="host-score clips with a packaged model folder")
     p_score.add_argument("--model-dir", required=True, help="folder with the three model files")
@@ -345,11 +382,11 @@ def main(argv=None):
     args = build_parser().parse_args(argv)
     try:
         if args.command == "check":
-            info = check_classifier(args.classifier)
+            info = check_classifier(args.classifier, args.profile)
             print(json.dumps({"ok": True, **info}, sort_keys=True))
         elif args.command == "package":
             target, manifest = package(args.classifier, args.name, args.feature_dir,
-                                       args.out, force=args.force)
+                                       args.out, force=args.force, profile=args.profile)
             print(json.dumps({"ok": True, "installed": target, "manifest": manifest},
                              indent=2, sort_keys=True))
         elif args.command == "score":

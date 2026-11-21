@@ -1,5 +1,11 @@
 # LibreEcho — independent experimental community fork
 
+This development branch tests **on-device wake words on the full-size Echo 2**.
+It lets the speaker and Home Assistant score the same microphone stream while
+music plays. [Run the wake-word comparison](docs/community/LOCAL_WAKE_TRIAL.md).
+For the released firmware and first-install recipe, use the
+[0.16.8 builder tag](https://github.com/sn45k58myn-dev/LibreEcho/tree/echo2-builder-v0.16.8).
+
 **Built on [LibreEcho](https://github.com/aslater3/LibreEcho), created by
 Andy Slater ([aslater3](https://github.com/aslater3)) and the LibreEcho contributors.**
 Full credit for the original project, architecture, hardware research and existing

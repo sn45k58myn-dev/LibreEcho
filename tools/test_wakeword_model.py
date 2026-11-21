@@ -102,6 +102,60 @@ class ClassifierContractTests(unittest.TestCase):
         with self.assertRaisesRegex(wm.CheckError, "Sigmoid"):
             wm.check_classifier(path)
 
+    def test_local_trial_accepts_normalized_graph_with_exported_score_name(self):
+        path = make_classifier(self.path("norm.onnx"), output_name="39")
+        model = onnx.load(path)
+        model.graph.node[-1].input[0] = "norm"
+        model.graph.node.insert(2, helper.make_node("ReduceMean", ["logit"], ["mean"], axes=[1]))
+        model.graph.node.insert(3, helper.make_node("Pow", ["mean", "two"], ["squared"]))
+        model.graph.node.insert(4, helper.make_node("Sqrt", ["squared"], ["norm"]))
+        model.graph.initializer.append(numpy_helper.from_array(np.array(2, np.float32), "two"))
+        onnx.checker.check_model(model)
+        onnx.save(model, path)
+        self.assertIn("Sqrt", wm.check_classifier(path, profile="local-trial")["operators"])
+        with self.assertRaisesRegex(wm.CheckError, "Sqrt"):
+            wm.check_classifier(path)
+
+    def test_local_trial_checks_the_producer_of_the_exported_score(self):
+        path = make_classifier(self.path("last.onnx"), output_name="score")
+        model = onnx.load(path)
+        model.graph.output[0].name = "logit"
+        onnx.save(model, path)
+        with self.assertRaisesRegex(wm.CheckError, "produced by Sigmoid"):
+            wm.check_classifier(path, profile="local-trial")
+
+    def test_local_trial_checks_domain_and_opset(self):
+        path = make_classifier(self.path("domain.onnx"))
+        model = onnx.load(path)
+        model.opset_import[0].version = 14
+        onnx.save(model, path)
+        with self.assertRaisesRegex(wm.CheckError, "opset 13"):
+            wm.check_classifier(path, profile="local-trial")
+        model.opset_import[0].version = 13
+        model.graph.node[0].domain = "custom"
+        onnx.save(model, path)
+        with self.assertRaisesRegex(wm.CheckError, "default domain"):
+            wm.check_classifier(path, profile="local-trial")
+
+    def test_local_trial_bounds_score_name_shape_and_type(self):
+        path = make_classifier(self.path("name.onnx"), output_name="a" * 128)
+        with self.assertRaisesRegex(wm.CheckError, "1..127"):
+            wm.check_classifier(path, profile="local-trial")
+        model = onnx.load(make_classifier(self.path("shape.onnx")))
+        for dtype, shape in ((TensorProto.FLOAT, [1, 2]), (TensorProto.FLOAT, ["n", 1]),
+                             (TensorProto.DOUBLE, [1, 1])):
+            with self.subTest(dtype=dtype, shape=shape):
+                model.graph.output[0].CopyFrom(helper.make_tensor_value_info(wm.CLASSIFIER_OUTPUT, dtype, shape))
+                onnx.save(model, path)
+                with self.assertRaisesRegex(wm.CheckError, "one float32 score"):
+                    wm.check_classifier(path, profile="local-trial")
+
+    def test_profile_requires_opt_in(self):
+        cli = wm.build_parser()
+        self.assertEqual(cli.parse_args(["check", "sample.onnx"]).profile, "stable")
+        self.assertEqual(cli.parse_args(["check", "--profile", "local-trial", "sample.onnx"]).profile,
+                         "local-trial")
+
     def test_refuses_symlinked_classifier(self):
         real = make_classifier(self.path("real.onnx"))
         link = self.path("link.onnx")
@@ -157,6 +211,12 @@ class StockModelTests(unittest.TestCase):
         with self.assertRaisesRegex(wm.CheckError, "--force"):
             wm.package(classifier, "twice", STOCK_DIR, self.tmp)
         wm.package(classifier, "twice", STOCK_DIR, self.tmp, force=True)
+
+    def test_package_marks_trial_profile_in_manifest(self):
+        path = make_classifier(os.path.join(self.tmp, "trial.onnx"), output_name="39")
+        target, manifest = wm.package(path, "trial", STOCK_DIR, self.tmp, profile="local-trial")
+        self.assertEqual(manifest["classifier_profile"], "local-trial")
+        self.assertEqual(wm.sha256_file(path), wm.sha256_file(os.path.join(target, wm.CLASSIFIER_FILE)))
 
     @unittest.skipUnless(FIXTURE_DIR and os.path.isfile(os.path.join(FIXTURE_DIR, "alexa-twice.wav")),
                          "set WAKEWORD_FIXTURE_DIR to the UI voice-e2e fixtures")
