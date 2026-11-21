@@ -38,4 +38,19 @@ The host model tool also supports this branch. With the dependencies in `tools/w
 
 A valid run reports its frame count, scores, detections, peak score and maximum inference time. A high score alone does not establish a detection. Count unintended detections during the music-only interval separately. An invalid run, a gap in the stream, or missing server evidence cannot establish which detector heard more attempts. Local wake detection still uses Home Assistant for speech recognition and replies in this setup.
 
+The launcher starts at the speaker's configured sensitivity. For a second run you can pass `--trial-sensitivity 100` for a threshold of 0.41, the most sensitive setting in the device's slider range. Check a music-only interval at that setting before comparing spoken attempts. This flag applies only to the temporary detector.
+
+## First hardware comparison
+
+The smaller ARM runtime was built from public source and exercised directly on Echo 2 hardware. With one synthetic voice, its classifier scored 0.971 for the wake phrase alone, 0.962 for the phrase digitally mixed with music at equal RMS level, and 0.00084 for the same music alone. A different synthetic voice scored 0.002 on the same phrase. These digital fixtures test the inference path. The room test below also includes the speaker, microphone array and echo cancellation.
+
+On one full-size Echo 2, both systems listened during two 120-second music trials. The reference ARM build ran the first trial. The second used the smaller ARM executable built by the public recipe. Each run processed 12,000 consecutive microphone frames and 1,500 classifier scores with zero dropped blocks.
+
+| Trial | Local threshold | Local detections | Home Assistant wake detections | Highest local score |
+| --- | ---: | ---: | ---: | ---: |
+| Configured sensitivity, five attempts | 0.551 | 0 | 2 | 0.451 |
+| Maximum trial sensitivity, five attempts | 0.410 | 1 | 3 | 0.811 |
+
+The single local detection in the second trial aligned with a Home Assistant detection. Its score also exceeded the original threshold, so the second result cannot be attributed to the threshold change alone. These results support keeping the existing server detector as the default on that unit. Other models, voices, rooms and playback levels need their own measurements.
+
 The trial ends automatically and its launcher removes the temporary classifier and executable. It makes no changes to the installed wake model, OTA settings, speaker volume or Assist pipeline. The existing firmware and the public component sources are credited in [Attribution](../../ATTRIBUTION.md).
