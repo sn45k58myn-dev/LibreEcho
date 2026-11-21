@@ -1,0 +1,8 @@
+#!/bin/sh
+# Only the full and reduced ONNX Runtime cross-configures need the archive mirror.
+for arg do
+    if [ "$arg" = "-Donnxruntime_CROSS_COMPILING=ON" ]; then
+        exec /usr/bin/cmake "-Donnxruntime_CMAKE_DEPS_MIRROR_DIR:PATH=/build/tmp-other/ort-cmake-mirror" "$@"
+    fi
+done
+exec /usr/bin/cmake "$@"

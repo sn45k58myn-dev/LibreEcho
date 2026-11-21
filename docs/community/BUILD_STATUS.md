@@ -4,6 +4,8 @@ The [Echo 2 release history](RELEASE_HISTORY.md) documents the progression from 
 
 The [0.16.8 build record](0.16.8.md) covers the signed OTA confirmation, the iPhone listening test and the offline first-install checks for the full-size Echo 2.
 
+For a new owner, the [public source builder](BUILD_ECHO2_0.16.8.md) fetches the matching sources and generates a personal signing identity on the build machine. The checksum file shipped with the resulting kit identifies that owner's firmware.
+
 | Check | Evidence |
 | --- | --- |
 | 0.16.8 initial install | Complete bundle, signature and five feature bindings passed offline preparation. Fresh hardware installation on a second unit is pending. |

@@ -16,6 +16,8 @@ LibreEcho release and is not endorsed by upstream or Amazon. Read
 
 [**Echo 2 0.16.8**](docs/community/0.16.8.md) reduces the caller's echo on the iPhone intercom and includes native Sendspin. A signed update and a normal iPhone call were verified on one full-size Echo 2. The complete first-install kit passed offline preparation and can be used directly on another prepared Radar/Puffin.
 
+To build the first-install kit with your own signing key, follow [Build 0.16.8 for a full-size Echo 2](docs/community/BUILD_ECHO2_0.16.8.md). The recipe uses public sources and needs no earlier firmware archive.
+
 See the [first-install and OTA guide](docs/community/0.16.8.md#use-0168-on-the-next-echo-2), [release history](docs/community/RELEASE_HISTORY.md), [Sendspin setup](docs/audio/sendspin.md) and [phone intercom setup](docs/audio/intercom.md). Voice commands for room-to-room [drop-in](docs/audio/drop-in.md) still need a physical two-speaker trial.
 
 Echo Dot 2 support is inherited from upstream and has not been qualified in this
