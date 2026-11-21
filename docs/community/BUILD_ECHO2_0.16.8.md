@@ -4,10 +4,10 @@ This recipe builds the 2017 Echo 2 (`radar_puffin`) firmware from four pinned pu
 
 ## Build on Linux
 
-Use an x86-64 Linux machine with Docker Engine, Git, Bash, Python 3 and `flock`. Docker must be able to reach the public package and source repositories during dependency preparation. Allow substantial disk space and several hours for a first build. Keep the working files on a Linux filesystem.
+Use an x86-64 Linux machine with Docker Engine, Git, Bash, Python 3 and `flock`. Docker needs internet access during dependency preparation. Keep the working files on a Linux filesystem. Allow several hours for a first build and space for Docker images, temporary files and the finished kit. The test workspace occupied 10 GiB at completion and its export used another 723 MiB.
 
 ```sh
-git clone --depth 1 --branch docs/community-publication https://github.com/sn45k58myn-dev/LibreEcho.git
+git clone --depth 1 --branch echo2-builder-v0.16.8 https://github.com/sn45k58myn-dev/LibreEcho.git
 cd LibreEcho
 bash tools/community-build/build.sh
 ```
@@ -18,9 +18,11 @@ The compiler and neural runtimes default to two parallel jobs. On a machine with
 
 ## Verification
 
-A Linux test build fetched the four pinned firmware source trees, reused public third-party compiler and library inputs, and compiled the firmware with a new signing key and no previous Echo image. Its 33 exported files include a signed OTA and a first-install kit. The matching installer prepared that kit offline, the Ed25519 signature verified, and all five features matched the signed manifest. Inspection of the packed ARM executables confirmed native Sendspin and the intercom echo filter. The signing seed was absent from the exported files, unpacked boot ramdisk and feature packages.
+Starting with an empty Docker volume, a Linux test fetched the four public source trees, checked the 67-entry dependency inventory, and rebuilt the compiler, neural libraries and firmware. It used a fresh signing key and no previous Echo firmware or owner files. The run took 1 h 52 min with independent tasks overlapped, including 30 min for the network-isolated image and packaging stage. Download speed, worker count and local hardware affect build time.
 
-A separate empty-volume test fetched and verified the 67-entry public dependency inventory. Installation on a second physical Echo 2 remains untested. [Hardware results for the original 0.16.8 build](0.16.8.md#what-was-verified)
+The kit contained 33 files. All 32 checksum entries, the Ed25519 signature, the five signed feature bindings and the matching installer's offline first-install preparation passed. The test checked the packed ARM executables and searched the export, unpacked boot ramdisk and feature packages for the test seed. Only the public verification key shipped.
+
+The clean build's intercom, microphone, Sendspin and audio-engine executables matched the hardware-tested release byte for byte. A separate build using cached public compiler and library inputs matched all five original executables. Comparing that build to the clean build showed that the wake daemon and echo-cancellation object files also matched, including `voice_aec` and `voice_aec_guard`. The rebuilt ONNX Runtime session library and the final linked wake executable had different digests. A fresh physical installation of the independently signed kit has yet to be tested. [Hardware results for the original 0.16.8 build](0.16.8.md#what-was-verified)
 
 ## Keep the output and your signing key
 
