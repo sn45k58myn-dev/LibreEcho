@@ -16,7 +16,11 @@ The command creates a local Docker build volume, fetches and checks the source c
 
 The compiler and neural runtimes default to two parallel jobs. On a machine with spare CPU and memory, prefix the build command with `LIBREECHO_BUILD_JOBS=4` to use four for these stages.
 
-For the initial publication, all four source checkouts and the 67-entry public input inventory have been verified from an empty build volume. Full image and first-install verification are in progress for the new owner-key recipe. The previously tested firmware and its hardware results are recorded in the [0.16.8 build record](0.16.8.md).
+## Verification
+
+A Linux test build fetched the four pinned firmware source trees, reused public third-party compiler and library inputs, and compiled the firmware with a new signing key and no previous Echo image. Its 33 exported files include a signed OTA and a first-install kit. The matching installer prepared that kit offline, the Ed25519 signature verified, and all five features matched the signed manifest. Inspection of the packed ARM executables confirmed native Sendspin and the intercom echo filter. The signing seed was absent from the exported files, unpacked boot ramdisk and feature packages.
+
+A separate empty-volume test fetched and verified the 67-entry public dependency inventory. Installation on a second physical Echo 2 remains untested. [Hardware results for the original 0.16.8 build](0.16.8.md#what-was-verified)
 
 ## Keep the output and your signing key
 

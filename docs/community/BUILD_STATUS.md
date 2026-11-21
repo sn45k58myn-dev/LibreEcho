@@ -8,6 +8,7 @@ For a new owner, the [public source builder](BUILD_ECHO2_0.16.8.md) fetches the 
 
 | Check | Evidence |
 | --- | --- |
+| 0.16.8 public source build | With a fresh owner key and no previous Echo image, the build exported 33 files. Installer preparation, OTA signature verification and all five feature bindings passed. The packed binaries include native Sendspin and the intercom echo filter. |
 | 0.16.8 initial install | Complete bundle, signature and five feature bindings passed offline preparation. Fresh hardware installation on a second unit is pending. |
 | 0.16.8 OTA and intercom | Confirmed after restart on one Echo 2. The iPhone caller reported less echo. The Sendspin listener and Home Assistant connection returned. |
 | Initial install and owner setup | Passed on one Echo 2 with 0.15.0. The 0.16.3 initial-install bundle passed local preparation and awaits a separate hardware trial. |
