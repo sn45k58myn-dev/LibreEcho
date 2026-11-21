@@ -13,11 +13,11 @@ Research is welcome; no delivery dates or support commitments are promised.
 
 ## Current evidence
 
-See the [release history](RELEASE_HISTORY.md) and [0.16.3 build record](0.16.3.md) for the exact builds and test conditions.
+See the [release history](RELEASE_HISTORY.md) and [0.16.8 build record](0.16.8.md) for the exact builds and test conditions.
 
 | Hardware | Status in these forks | What the evidence establishes |
 | --- | --- | --- |
-| Full-size Amazon Echo 2nd Generation (2017), `radar_puffin` | Experimental source release with limited hardware verification | One unit passed first install on 0.15.0, native Sendspin on 0.15.1, and signed OTA plus one two-way iPhone Safari call on 0.16.3. A fresh 0.16.3 installation and repeated intercom tests still need hardware evidence. |
+| Full-size Amazon Echo 2nd Generation (2017), `radar_puffin` | Experimental source release with limited hardware verification | One unit passed first install on 0.15.0, native Sendspin on 0.15.1, and signed OTA plus one two-way iPhone Safari call on 0.16.3. The 0.16.8 OTA reduced audible iPhone intercom echo on the same unit. A fresh 0.16.8 install on a second device and long-duration call tests are pending. |
 | Amazon Echo Dot 2nd Generation, `biscuit` | Upstream-supported target; untested in this fork | Existing upstream target code is retained. These forks have not built and hardware-qualified a Dot release. |
 | Amazon Echo 3rd Generation | Research proposal only; unsupported | No port, target descriptor, compatible image or physical acceptance is provided here. |
 | Amazon Echo Studio | Research proposal only; unsupported | No port, target descriptor, compatible image or physical acceptance is provided here. |
@@ -30,7 +30,7 @@ the documented hardware gates.
 
 ## Echo 2 development priorities
 
-1. **Repeat installation and OTA tests.** Start with a prepared, compatible full-size Echo 2 and try a fresh 0.16.3 installation. Record setup, reboot and slot health. Test update recovery separately using the matching signing trust.
+1. **Repeat installation and OTA tests.** Start with a prepared, compatible full-size Echo 2 and try a fresh 0.16.8 installation. Record setup, reboot and slot health. Test update recovery separately using the matching signing trust.
 2. **Measure audio reliability.** Repeat Sendspin group starts and leave/rejoin tests. Measure offset across longer sessions and confirm wake-word pickup, playback ducking and resume. Repeat two-way phone calls and check call cleanup when the browser closes or Wi-Fi is interrupted.
 3. **Validate room-to-room drop-in.** The Home Assistant prototype can route a spoken room name to simulated endpoints. A pair of physical intercom-capable speakers must still prove two-way audio, room routing, busy handling, mute and call cleanup. See the [drop-in development notes](../audio/drop-in.md).
 4. **Keep future hardware model-specific.** Echo Dot 2, Echo 3 and Echo Studio need their own evidence before any new support claim. Use the [board proposal template](BOARD_PROPOSAL.md) to track hardware research.

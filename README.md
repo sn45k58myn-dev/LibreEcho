@@ -14,17 +14,9 @@ LibreEcho release and is not endorsed by upstream or Amazon. Read
 
 ## Source and hardware status
 
-See the [Echo 2 release history](docs/community/RELEASE_HISTORY.md) for all six builds, their exact source commits and their hardware test status.
+[**Echo 2 0.16.8**](docs/community/0.16.8.md) reduces the caller's echo on the iPhone intercom and includes native Sendspin. A signed update and a normal iPhone call were verified on one full-size Echo 2. The complete first-install kit passed offline preparation and can be used directly on another prepared Radar/Puffin.
 
-[**0.16.3 source and hardware results**](docs/community/0.16.3.md) covers the full-size
-Echo 2nd Generation (Radar/Puffin). It includes native Sendspin and local phone
-intercom. Signed OTA and one two-way iPhone intercom call passed on one Echo 2.
-The linked record gives exact build inputs and the scope of each test.
-
-Use the [installation options](docs/community/0.16.3.md#installation-options),
-[Sendspin guide](docs/audio/sendspin.md) and [phone intercom guide](docs/audio/intercom.md)
-for this fork. Voice commands for room-to-room [drop-in](docs/audio/drop-in.md)
-are in development and still need a physical two-speaker test.
+See the [first-install and OTA guide](docs/community/0.16.8.md#use-0168-on-the-next-echo-2), [release history](docs/community/RELEASE_HISTORY.md), [Sendspin setup](docs/audio/sendspin.md) and [phone intercom setup](docs/audio/intercom.md). Voice commands for room-to-room [drop-in](docs/audio/drop-in.md) still need a physical two-speaker trial.
 
 Echo Dot 2 support is inherited from upstream and has not been qualified in this
 fork. Echo 3, Echo Studio and additional boards remain research targets.
@@ -48,8 +40,7 @@ and preserve the existing source, test, licence and boot-chain rules.
 
 ## Build, installation and automation boundaries
 
-GitHub hosts the source pre-releases and validation records. The signed firmware
-stays local because a bundled audio FPGA component is blocked for redistribution.
+GitHub hosts the source pre-releases and validation records. See the [0.16.8 build record](docs/community/0.16.8.md#build-identification) for the third-party components and why the complete signed kit stays local.
 An OTA requires the signing trust configured on the installed build.
 
 Inherited build/release workflows and download wrappers still contain upstream

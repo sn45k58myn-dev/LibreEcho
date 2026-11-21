@@ -2,10 +2,12 @@
 
 The [Echo 2 release history](RELEASE_HISTORY.md) documents the progression from the first install to Sendspin recovery and two-way iPhone calling.
 
-The current [0.16.3 source and hardware results](0.16.3.md) document the full-size Echo 2. The public GitHub releases contain source snapshots, build inputs and validation notes. The tested signed image is local because the audio FPGA component is blocked for redistribution.
+The [0.16.8 build record](0.16.8.md) covers the signed OTA confirmation, the iPhone listening test and the offline first-install checks for the full-size Echo 2.
 
 | Check | Evidence |
 | --- | --- |
+| 0.16.8 initial install | Complete bundle, signature and five feature bindings passed offline preparation. Fresh hardware installation on a second unit is pending. |
+| 0.16.8 OTA and intercom | Confirmed after restart on one Echo 2. The iPhone caller reported less echo. The Sendspin listener and Home Assistant connection returned. |
 | Initial install and owner setup | Passed on one Echo 2 with 0.15.0. The 0.16.3 initial-install bundle passed local preparation and awaits a separate hardware trial. |
 | Native Sendspin | Playback and voice stop/restart passed on 0.15.1. Two-speaker alignment was judged by ear after restarting the group. Long-duration or instrumented sync remains open. |
 | 0.16.3 signed OTA | Passed on the same Echo 2 and Home Assistant reconnected after restart. OTA requires compatible firmware and matching signing trust. |

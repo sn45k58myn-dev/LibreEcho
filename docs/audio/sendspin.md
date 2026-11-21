@@ -3,7 +3,7 @@
 The community fork verified native playback and voice stop/restart on one
 full-size Echo 2 using 0.15.1. A two-speaker group sounded aligned after a
 fresh group start. Alignment over longer sessions and measured offsets are
-open validation items for this fork. 0.16.3 carries the recovery changes.
+open validation items for this fork. 0.16.8 includes these changes. Its Sendspin listener returned after the tested OTA.
 See the [fork release history](../community/RELEASE_HISTORY.md).
 
 > Upstream introduced Sendspin in 0.14.5 and tested it on an Echo (2nd generation) and an Echo Dot with
