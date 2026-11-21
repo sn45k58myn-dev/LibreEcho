@@ -119,7 +119,13 @@ phase musl bash build/ci/build-public-toolchain.sh /build/toolchain
 phase ort-mirror python3 "$recipe/prepare-wake-deps.py" "$RUNNER_TEMP/public-deps/onnxruntime-source" "$RUNNER_TEMP/ort-cmake-mirror"
 install -D -m0755 "$recipe/cmake-with-ort-mirror" "$RUNNER_TEMP/host-bin/cmake"
 phase neural bash build/ci/build-public-neural-deps.sh "$RUNNER_TEMP/public-deps" "$RUNNER_TEMP/armhf-root"
-phase airplay step build-image "Stage public ARMHF AirPlay sysroot"
+airplay() {
+    # A failed download can leave this generated directory partially populated.
+    # The upstream stage requires an empty destination on every rebuild.
+    rm -rf -- "$RUNNER_TEMP/public-deps/airplay-sysroot"
+    step build-image "Stage public ARMHF AirPlay sysroot"
+}
+phase airplay airplay
 phase mdns mdns
 phase host-tools host_tools
 printf '%s\n' 'Public build dependencies ready.'
